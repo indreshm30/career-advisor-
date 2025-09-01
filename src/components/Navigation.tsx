@@ -17,9 +17,25 @@ export const Navigation = () => {
   const [activeSection, setActiveSection] = useState('hero');
   const [isDark, setIsDark] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Handle visibility based on scroll direction
+      if (currentScrollY < lastScrollY || currentScrollY < 100) {
+        // Scrolling up or near the top - show header
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        // Scrolling down and past 100px - hide header
+        setIsVisible(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+
+      // Handle active section highlighting
       const sections = navigationItems.map(item => item.id);
       const currentSection = sections.find(section => {
         const element = document.getElementById(section);
@@ -36,7 +52,7 @@ export const Navigation = () => {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [lastScrollY]);
 
   const toggleTheme = () => {
     setIsDark(!isDark);
@@ -55,8 +71,11 @@ export const Navigation = () => {
     <motion.nav 
       className="fixed top-0 left-0 right-0 z-50 glass-strong"
       initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      animate={{ 
+        opacity: 1, 
+        y: isVisible ? 0 : -100 
+      }}
+      transition={{ duration: 0.3, ease: "easeInOut" }}
     >
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
@@ -84,19 +103,6 @@ export const Navigation = () => {
               >
                 {item.label}
               </Button>
-            ))}
-          </div>
-
-          {/* Progress Dots */}
-          <div className="hidden lg:flex items-center space-x-2 mx-8">
-            {navigationItems.map((item) => (
-              <div
-                key={item.id}
-                className={`progress-dot ${activeSection === item.id ? 'active' : ''}`}
-                onClick={() => scrollToSection(item.id)}
-                role="button"
-                tabIndex={0}
-              />
             ))}
           </div>
 
