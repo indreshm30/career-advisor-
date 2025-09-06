@@ -1,0 +1,28 @@
+.scroll-stack-scroller {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.scroll-stack-inner {
+    position: relative;
+    min-height: 200vh;
+}
+
+.scroll-stack-card {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    border-radius: 1rem;
+    transform-origin: top center;
+    will-change: transform, filter;
+    backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
+}
+
+.scroll-stack-end {
+    height: 100vh;
+    pointer-events: none;
+}

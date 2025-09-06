@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { User, MapPin, Target, BookOpen, ArrowRight } from 'lucide-react';
 import { useInView } from 'react-intersection-observer';
+import { CardSection } from './CardSection';
 
 const steps = [
   {
@@ -36,9 +37,9 @@ export const HowItWorksSection = () => {
   });
 
   return (
-    <section id="how-it-works" className="section relative">
+    <CardSection id="how-it-works" className="relative">
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/20 to-transparent" />
-      
+
       <div className="section-content relative z-10" ref={ref}>
         <div className="text-center mb-16">
           <motion.h2
@@ -128,6 +129,6 @@ export const HowItWorksSection = () => {
           </div>
         </motion.div>
       </div>
-    </section>
+    </CardSection>
   );
 };

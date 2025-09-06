@@ -90,7 +90,7 @@
     --secondary-foreground: 0 0% 95%;
 
     --muted: 156 8% 15%;
-    --muted-foreground: 156 4% 60%;
+    --muted-foreground: 156 4% 70%;
 
     --accent: 156 8% 18%;
     --accent-foreground: 0 0% 95%;
@@ -124,6 +124,7 @@
 }
 
 @layer components {
+
   /* Glass morphism effects */
   .glass {
     background: var(--gradient-glass);
@@ -152,6 +153,24 @@
     box-shadow: var(--shadow-float);
   }
 
+  /* Card landing animation for sections */
+  .card-landing {
+    animation: cardLanding 0.6s ease-out forwards;
+  }
+
+  @keyframes cardLanding {
+    from {
+      opacity: 0;
+      transform: translateY(100px) scale(0.95);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+    }
+  }
+
   /* Magnetic button effect */
   .magnetic-btn {
     @apply relative overflow-hidden transition-all duration-300;
@@ -176,6 +195,8 @@
   /* Cinematic section spacing */
   .section {
     @apply min-h-screen flex items-center justify-center px-4 py-20;
+    padding-top: 6rem;
+    /* Add extra top padding for better spacing */
   }
 
   .section-content {
@@ -190,6 +211,29 @@
     background-clip: text;
   }
 
+  /* Theme-aware text colors */
+  .text-theme-primary {
+    color: hsl(var(--foreground));
+  }
+
+  .dark .text-theme-primary {
+    color: hsl(var(--primary));
+  }
+
+  .text-theme-gradient {
+    background: linear-gradient(135deg, hsl(var(--foreground)), hsl(var(--primary)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .dark .text-theme-gradient {
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   /* Progress indicator */
   .progress-dot {
     @apply w-2 h-2 rounded-full bg-muted transition-all duration-300;
@@ -198,6 +242,23 @@
   .progress-dot.active {
     @apply bg-primary scale-125;
     box-shadow: 0 0 12px hsl(var(--primary));
+  }
+
+  /* Glow pulse animation */
+  .animate-glow-pulse {
+    animation: glow-pulse 2s infinite;
+  }
+
+  @keyframes glow-pulse {
+
+    0%,
+    100% {
+      box-shadow: 0 0 20px hsl(var(--primary) / 0.3);
+    }
+
+    50% {
+      box-shadow: 0 0 30px hsl(var(--primary) / 0.6), 0 0 40px hsl(var(--primary) / 0.3);
+    }
   }
 }
 

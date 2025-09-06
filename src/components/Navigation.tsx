@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Moon, Sun, Menu, X } from 'lucide-react';
+import { Moon, Sun, Menu, X, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { UserProfileDropdown } from './UserProfileDropdown';
 
 const navigationItems = [
   { id: 'hero', label: 'Home' },
@@ -13,7 +14,13 @@ const navigationItems = [
   { id: 'contact', label: 'Contact' },
 ];
 
-export const Navigation = () => {
+interface NavigationProps {
+  onChatOpen?: () => void;
+  onChatClose?: () => void;
+  isChatOpen?: boolean;
+}
+
+export const Navigation = ({ onChatOpen, onChatClose, isChatOpen }: NavigationProps) => {
   const [activeSection, setActiveSection] = useState('hero');
   const [isDark, setIsDark] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
@@ -23,7 +30,7 @@ export const Navigation = () => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      
+
       // Handle visibility based on scroll direction
       if (currentScrollY < lastScrollY || currentScrollY < 100) {
         // Scrolling up or near the top - show header
@@ -32,7 +39,7 @@ export const Navigation = () => {
         // Scrolling down and past 100px - hide header
         setIsVisible(false);
       }
-      
+
       setLastScrollY(currentScrollY);
 
       // Handle active section highlighting
@@ -67,20 +74,40 @@ export const Navigation = () => {
     setIsMobileOpen(false);
   };
 
+  const handleProfileClick = () => {
+    // For now, just show an alert. You can replace this with actual navigation
+    alert('Profile page coming soon!');
+  };
+
+  const handleLogoutClick = () => {
+    // For now, just show confirmation. You can replace this with actual logout logic
+    if (confirm('Are you sure you want to logout?')) {
+      alert('Logged out successfully!');
+    }
+  };
+
+  const handleChatToggle = () => {
+    if (isChatOpen) {
+      onChatClose?.();
+    } else {
+      onChatOpen?.();
+    }
+  };
+
   return (
-    <motion.nav 
+    <motion.nav
       className="fixed top-0 left-0 right-0 z-50 glass-strong"
       initial={{ opacity: 0, y: -20 }}
-      animate={{ 
-        opacity: 1, 
-        y: isVisible ? 0 : -100 
+      animate={{
+        opacity: 1,
+        y: isVisible ? 0 : -100
       }}
       transition={{ duration: 0.3, ease: "easeInOut" }}
     >
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <motion.div 
+          <motion.div
             className="text-xl font-bold text-gradient"
             whileHover={{ scale: 1.05 }}
           >
@@ -95,18 +122,31 @@ export const Navigation = () => {
                 variant="ghost"
                 size="sm"
                 onClick={() => scrollToSection(item.id)}
-                className={`magnetic-btn ${
-                  activeSection === item.id 
-                    ? 'bg-primary/10 text-primary' 
+                className={`magnetic-btn ${activeSection === item.id
+                    ? 'bg-primary/10 text-primary'
                     : 'text-muted-foreground hover:text-foreground'
-                }`}
+                  }`}
               >
                 {item.label}
               </Button>
             ))}
+
+            {/* Chat Button */}
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleChatToggle}
+              className={`magnetic-btn ml-2 ${isChatOpen
+                  ? 'text-primary bg-primary/10'
+                  : 'text-muted-foreground hover:text-foreground'
+                }`}
+            >
+              <MessageCircle className="w-4 h-4 mr-2" />
+              Chat
+            </Button>
           </div>
 
-          {/* Theme Toggle & Mobile Menu */}
+          {/* Theme Toggle, User Profile & Mobile Menu */}
           <div className="flex items-center space-x-2">
             <Button
               variant="ghost"
@@ -116,6 +156,14 @@ export const Navigation = () => {
             >
               {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
+
+            {/* User Profile Dropdown */}
+            <div className="hidden md:block">
+              <UserProfileDropdown
+                onProfileClick={handleProfileClick}
+                onLogoutClick={handleLogoutClick}
+              />
+            </div>
 
             <Button
               variant="ghost"
@@ -142,15 +190,35 @@ export const Navigation = () => {
                   key={item.id}
                   variant="ghost"
                   onClick={() => scrollToSection(item.id)}
-                  className={`justify-start ${
-                    activeSection === item.id 
-                      ? 'bg-primary/10 text-primary' 
+                  className={`justify-start ${activeSection === item.id
+                      ? 'bg-primary/10 text-primary'
                       : 'text-muted-foreground'
-                  }`}
+                    }`}
                 >
                   {item.label}
                 </Button>
               ))}
+
+              {/* Mobile Chat Button */}
+              <Button
+                variant="ghost"
+                onClick={handleChatToggle}
+                className={`justify-start ${isChatOpen
+                    ? 'text-primary bg-primary/10'
+                    : 'text-muted-foreground'
+                  }`}
+              >
+                <MessageCircle className="w-4 h-4 mr-2" />
+                Chat
+              </Button>
+
+              {/* Mobile User Profile */}
+              <div className="border-t border-border pt-2 mt-2">
+                <UserProfileDropdown
+                  onProfileClick={handleProfileClick}
+                  onLogoutClick={handleLogoutClick}
+                />
+              </div>
             </div>
           </motion.div>
         )}
