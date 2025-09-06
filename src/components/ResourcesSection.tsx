@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  BookOpen, 
-  Video, 
-  FileText, 
-  ExternalLink, 
-  Filter, 
-  Star, 
-  Clock, 
+import {
+  BookOpen,
+  Video,
+  FileText,
+  ExternalLink,
+  Filter,
+  Star,
+  Clock,
   DollarSign,
   Bookmark,
   Search,
@@ -126,9 +126,9 @@ export const ResourcesSection = () => {
 
   const filteredResources = resources.filter(resource => {
     const matchesSearch = resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         resource.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         resource.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-    
+      resource.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      resource.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+
     const matchesType = activeFilters.type === 'All' || resource.type === activeFilters.type;
     const matchesPrice = activeFilters.price === 'All' || resource.price === activeFilters.price;
     const matchesLevel = activeFilters.level === 'All' || resource.level === activeFilters.level;
@@ -137,7 +137,7 @@ export const ResourcesSection = () => {
   });
 
   const toggleBookmark = (resourceId: number) => {
-    setBookmarkedItems(prev => 
+    setBookmarkedItems(prev =>
       prev.includes(resourceId)
         ? prev.filter(id => id !== resourceId)
         : [...prev, resourceId]
@@ -157,7 +157,7 @@ export const ResourcesSection = () => {
   return (
     <section id="resources" className="section relative">
       <div className="absolute inset-0 bg-gradient-to-b from-secondary/10 to-transparent" />
-      
+
       <div className="section-content relative z-10" ref={ref}>
         <div className="text-center mb-12">
           <motion.h2
@@ -228,7 +228,7 @@ export const ResourcesSection = () => {
             {filteredResources.map((resource, index) => {
               const TypeIcon = getTypeIcon(resource.type);
               const isBookmarked = bookmarkedItems.includes(resource.id);
-              
+
               return (
                 <motion.div
                   key={resource.id}
@@ -283,11 +283,10 @@ export const ResourcesSection = () => {
                           <span>{resource.duration}</span>
                         </div>
                       </div>
-                      <div className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        resource.price === 'Free' 
-                          ? 'text-green-500 bg-green-500/10' 
+                      <div className={`px-2 py-1 rounded-full text-xs font-medium ${resource.price === 'Free'
+                          ? 'text-green-500 bg-green-500/10'
                           : 'text-blue-500 bg-blue-500/10'
-                      }`}>
+                        }`}>
                         {resource.price}
                       </div>
                     </div>

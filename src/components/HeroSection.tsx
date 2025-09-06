@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { ArrowRight, TrendingUp, Users, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useInView } from 'react-intersection-observer';
@@ -22,7 +22,7 @@ export const HeroSection = () => {
 
   return (
     <section id="hero" className="section relative overflow-hidden pt-32">
-      {/* Background Elements */}
+      {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary-light/5" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
 

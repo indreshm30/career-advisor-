@@ -21,6 +21,7 @@ const BlendText: React.FC<BlendTextProps> = ({
     onAnimationComplete,
 }) => {
     const [inView, setInView] = useState(false);
+    const [animationKey, setAnimationKey] = useState(0);
     const ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -30,7 +31,10 @@ const BlendText: React.FC<BlendTextProps> = ({
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setInView(true);
-                    observer.unobserve(ref.current as Element);
+                    // Force re-render by updating key
+                    setAnimationKey(prev => prev + 1);
+                } else {
+                    setInView(false);
                 }
             },
             { threshold, rootMargin }
@@ -45,10 +49,10 @@ const BlendText: React.FC<BlendTextProps> = ({
     return (
         <div ref={ref} className={className}>
             {words.map((word, wordIndex) => (
-                <span key={wordIndex} className="inline-block mr-2">
+                <span key={`${animationKey}-word-${wordIndex}`} className="inline-block mr-2">
                     {word.split('').map((char, charIndex) => (
                         <motion.span
-                            key={charIndex}
+                            key={`${animationKey}-char-${wordIndex}-${charIndex}`}
                             className="inline-block"
                             initial={{
                                 opacity: 0,
@@ -77,11 +81,11 @@ const BlendText: React.FC<BlendTextProps> = ({
                             }
                             transition={{
                                 duration,
-                                delay: delay + (wordIndex * 0.1) + (charIndex * 0.02),
+                                delay: inView ? delay + (wordIndex * 0.1) + (charIndex * 0.02) : 0,
                                 ease: [0.25, 0.46, 0.45, 0.94],
                             }}
                             onAnimationComplete={
-                                wordIndex === words.length - 1 && charIndex === word.length - 1
+                                wordIndex === words.length - 1 && charIndex === word.length - 1 && inView
                                     ? onAnimationComplete
                                     : undefined
                             }

@@ -184,7 +184,7 @@ export const ContactSection = () => {
             >
               <div className="space-y-6">
                 <h3 className="text-2xl font-semibold">Why Choose Our AI Career Advisor?</h3>
-                
+
                 <div className="space-y-4">
                   {[
                     {

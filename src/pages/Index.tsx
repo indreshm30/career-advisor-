@@ -10,6 +10,7 @@ import { AboutSection } from '@/components/AboutSection';
 import { ContactSection } from '@/components/ContactSection';
 import { ChatSidebar } from '@/components/ChatSidebar';
 import { FloatingChatButton } from '@/components/FloatingChatButton';
+import { PageTransition } from '@/components/PageTransition';
 
 const Index = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -32,7 +33,8 @@ const Index = () => {
         onChatClose={handleChatClose}
         isChatOpen={isChatOpen}
       />
-      <main>
+
+      <PageTransition>
         <HeroSection />
         <HowItWorksSection />
         <CareerPathsSection />
@@ -41,7 +43,7 @@ const Index = () => {
         <ResourcesSection />
         <AboutSection />
         <ContactSection />
-      </main>
+      </PageTransition>
 
       {/* Chat Components */}
       {!isChatOpen && <FloatingChatButton onClick={handleChatOpen} />}

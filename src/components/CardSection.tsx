@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useInView } from 'react-intersection-observer';
 import { ReactNode } from 'react';
 
@@ -6,31 +6,33 @@ interface CardSectionProps {
     children: ReactNode;
     className?: string;
     delay?: number;
+    id?: string;
 }
 
-export const CardSection = ({ children, className = '', delay = 0 }: CardSectionProps) => {
+export const CardSection = ({ children, className = '', delay = 0, id }: CardSectionProps) => {
     const [ref, inView] = useInView({
         threshold: 0.1,
         triggerOnce: true,
     });
 
     return (
-        <motion.section
+        <section
+            id={id}
             ref={ref}
-            initial={{ opacity: 0, y: 100, scale: 0.95 }}
-            animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 100, scale: 0.95 }}
-            transition={{
-                duration: 0.6,
-                ease: "easeOut",
-                delay: delay
-            }}
-            className={`section relative ${className}`}
-            style={{
-                boxShadow: inView ? '0 20px 40px -12px rgba(0, 0, 0, 0.1)' : '0 0 0 0 rgba(0, 0, 0, 0)',
-                transition: 'box-shadow 0.6s ease-out'
-            }}
+            className={`h-screen relative flex items-center justify-center ${className}`}
         >
-            {children}
-        </motion.section>
+            <motion.div
+                initial={{ opacity: 0, y: 50, scale: 0.95 }}
+                animate={inView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.95 }}
+                transition={{
+                    duration: 0.8,
+                    ease: [0.16, 1, 0.3, 1],
+                    delay: delay
+                }}
+                className="w-full max-w-7xl mx-auto px-4"
+            >
+                {children}
+            </motion.div>
+        </section>
     );
 };

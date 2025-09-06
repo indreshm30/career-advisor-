@@ -55,7 +55,7 @@ export const SkillAnalysisSection = () => {
   return (
     <section id="skill-analysis" className="section relative">
       <div className="absolute inset-0 bg-gradient-to-b from-muted/20 to-transparent" />
-      
+
       <div className="section-content relative z-10" ref={ref}>
         <div className="text-center mb-12">
           <motion.h2
@@ -235,7 +235,7 @@ export const SkillAnalysisSection = () => {
                               {item.impact} Impact
                             </span>
                           </div>
-                          
+
                           {/* Progress Bars */}
                           <div className="space-y-1">
                             <div className="flex justify-between text-xs text-muted-foreground">
@@ -278,10 +278,9 @@ export const SkillAnalysisSection = () => {
                             <span className="text-sm">{item.skill}</span>
                             <div className="flex items-center gap-2 text-xs text-muted-foreground">
                               <span>~2-4 weeks</span>
-                              <div className={`w-2 h-2 rounded-full ${
-                                item.impact === 'Very High' ? 'bg-red-500' : 
-                                item.impact === 'High' ? 'bg-orange-500' : 'bg-yellow-500'
-                              }`} />
+                              <div className={`w-2 h-2 rounded-full ${item.impact === 'Very High' ? 'bg-red-500' :
+                                  item.impact === 'High' ? 'bg-orange-500' : 'bg-yellow-500'
+                                }`} />
                             </div>
                           </div>
                         ))}

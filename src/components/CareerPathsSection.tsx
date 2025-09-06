@@ -93,7 +93,7 @@ export const CareerPathsSection = () => {
 
   const filteredPaths = careerPaths.filter(path => {
     const matchesSearch = path.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         path.description.toLowerCase().includes(searchTerm.toLowerCase());
+      path.description.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesDomain = selectedDomain === 'All' || path.domain === selectedDomain;
     return matchesSearch && matchesDomain;
   });
@@ -109,7 +109,7 @@ export const CareerPathsSection = () => {
   return (
     <section id="career-paths" className="section relative">
       <div className="absolute inset-0 bg-gradient-to-b from-accent/10 to-transparent" />
-      
+
       <div className="section-content relative z-10" ref={ref}>
         <div className="text-center mb-12">
           <motion.h2

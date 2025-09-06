@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
-import { 
-  Brain, 
-  Shield, 
-  Users, 
-  Award, 
-  ChevronDown, 
-  CheckCircle, 
+import {
+  Brain,
+  Shield,
+  Users,
+  Award,
+  ChevronDown,
+  CheckCircle,
   Lock,
   Database,
   Zap
@@ -57,7 +57,7 @@ export const AboutSection = () => {
   return (
     <section id="about" className="section relative">
       <div className="absolute inset-0 bg-gradient-to-b from-muted/10 to-transparent" />
-      
+
       <div className="section-content relative z-10" ref={ref}>
         <div className="text-center mb-16">
           <motion.h2
@@ -74,7 +74,7 @@ export const AboutSection = () => {
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Built by career experts and data scientists to democratize personalized career guidance 
+            Built by career experts and data scientists to democratize personalized career guidance
             using cutting-edge AI and real-time market intelligence
           </motion.p>
         </div>
@@ -94,13 +94,13 @@ export const AboutSection = () => {
               <div className="space-y-4">
                 <h3 className="text-2xl font-bold">Our Mission</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  We believe everyone deserves access to personalized career guidance. Our AI-powered platform 
-                  democratizes career counseling by providing instant, data-driven insights that were previously 
+                  We believe everyone deserves access to personalized career guidance. Our AI-powered platform
+                  democratizes career counseling by providing instant, data-driven insights that were previously
                   available only to those who could afford expensive career coaches.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  By analyzing millions of career trajectories and market trends, we help you make informed 
-                  decisions about your professional future, identify the most valuable skills to learn, and 
+                  By analyzing millions of career trajectories and market trends, we help you make informed
+                  decisions about your professional future, identify the most valuable skills to learn, and
                   create actionable roadmaps for career success.
                 </p>
               </div>
@@ -188,7 +188,7 @@ export const AboutSection = () => {
                   <h4 className="font-semibold">Transparent AI</h4>
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  We believe in explainable AI. Every recommendation comes with clear reasoning, 
+                  We believe in explainable AI. Every recommendation comes with clear reasoning,
                   data sources, and confidence levels so you understand why we suggest specific paths.
                 </p>
               </div>
@@ -255,7 +255,7 @@ export const AboutSection = () => {
             <Users className="h-12 w-12 text-primary mx-auto mb-4" />
             <h3 className="text-xl font-semibold mb-3">Built by Career Experts</h3>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Our team combines decades of experience in career counseling, data science, and AI 
+              Our team combines decades of experience in career counseling, data science, and AI
               to create the most comprehensive career guidance platform available today.
             </p>
           </motion.div>

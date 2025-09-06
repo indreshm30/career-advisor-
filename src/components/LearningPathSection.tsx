@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  BookOpen, 
-  CheckCircle, 
-  Clock, 
-  Trophy, 
-  PlayCircle, 
-  FileText, 
-  Code, 
+import {
+  BookOpen,
+  CheckCircle,
+  Clock,
+  Trophy,
+  PlayCircle,
+  FileText,
+  Code,
   Award,
   ChevronRight,
   Zap
@@ -107,7 +107,7 @@ export const LearningPathSection = () => {
   return (
     <section id="learning-path" className="section relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent" />
-      
+
       <div className="section-content relative z-10" ref={ref}>
         <div className="text-center mb-12">
           <motion.h2
@@ -185,7 +185,7 @@ export const LearningPathSection = () => {
                       <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${stage.color} flex items-center justify-center text-white font-bold`}>
                         {stage.id}
                       </div>
-                      
+
                       {/* Stage Info */}
                       <div>
                         <div className="flex items-center gap-3 mb-1">
@@ -240,11 +240,10 @@ export const LearningPathSection = () => {
                               transition={{ duration: 0.3, delay: taskIndex * 0.1 }}
                             >
                               {/* Completion Status */}
-                              <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                                task.completed 
-                                  ? 'bg-green-500 text-white' 
+                              <div className={`w-6 h-6 rounded-full flex items-center justify-center ${task.completed
+                                  ? 'bg-green-500 text-white'
                                   : 'border-2 border-muted'
-                              }`}>
+                                }`}>
                                 {task.completed && <CheckCircle className="h-4 w-4" />}
                               </div>
 
