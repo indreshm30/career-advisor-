@@ -54,8 +54,8 @@ const PageWrapper = ({ children, index }: PageWrapperProps) => {
     <motion.div
       className="relative"
       initial={{ opacity: 0, scale: 0.95, y: 50 }}
-      whileInView={{ 
-        opacity: 1, 
+      whileInView={{
+        opacity: 1,
         scale: 1,
         y: 0,
         transition: {
@@ -64,8 +64,8 @@ const PageWrapper = ({ children, index }: PageWrapperProps) => {
           delay: 0.1
         }
       }}
-      viewport={{ 
-        once: false, 
+      viewport={{
+        once: false,
         amount: 0.2,
         margin: "-100px 0px -100px 0px"
       }}

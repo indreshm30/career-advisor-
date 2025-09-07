@@ -3,6 +3,7 @@ import { ArrowRight, TrendingUp, Users, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useInView } from 'react-intersection-observer';
 import BlendText from './BlendText';
+import Threads from './Threads';
 
 export const HeroSection = () => {
   const [ref, inView] = useInView({
@@ -25,6 +26,16 @@ export const HeroSection = () => {
       {/* Background Effects */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary-light/5" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
+
+      {/* Threads Animation Background */}
+      <div className="absolute inset-0 opacity-30 dark:opacity-60">
+        <Threads
+          amplitude={1.5}
+          distance={0.2}
+          enableMouseInteraction={true}
+          color={[0.2, 0.8, 0.4]} // Green theme color
+        />
+      </div>
 
       <div className="section-content relative z-10" ref={ref}>
         <div className="text-center max-w-4xl mx-auto">
